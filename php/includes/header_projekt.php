@@ -22,6 +22,11 @@
 
     <!-- Custom styles for this template -->
     <link href="../bootstrap/css/agency.css" rel="stylesheet" type = "text/css">
+	<!--DataTables CSS-->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+	
+	
 
 	<style>
 	
@@ -74,7 +79,7 @@ form{
         
 		<ul class = "navbar-nav nav navbar-left text-uppercase ml-auto">
 			<li class = "nav-item">
-				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">Početak</a>
+				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">na vrh</a>
 			</li>
 		</ul>
 		
@@ -153,7 +158,7 @@ form{
         
 		<ul class = "navbar-nav nav navbar-left text-uppercase ml-auto">
 			<li class = "nav-item">
-				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">Početak</a>
+				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">na vrh</a>
 			</li>
 		</ul>
 		
@@ -304,18 +309,13 @@ form{
 	else{
 
 		echo '
-  
-	
-        
-       
-        
     <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" class="navbar-header"><a href="index.php" class="navbar-brand">THREAD</a>
       <div class="container"> 
         
 		<ul class = "navbar-nav nav navbar-left text-uppercase ml-auto">
 			<li class = "nav-item">
-				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">Početak</a>
+				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">na vrh</a>
 			</li>
 		</ul>
 		
@@ -331,13 +331,13 @@ form{
             <li class="dropdown nav-item" >
 				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" >komponente</a>
 				<ul class ="dropdown-menu" >
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Cpu</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Matična ploča</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Napajanje</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Grafička kartica</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Tvrdi disk</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">SSD</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Memorija</a></li>
+					<li><a class = "nav-link " id = "cpu" style = "color:black; font-weight:bold;" value = "cpu" onClick = "reply_click(this.id)" href="#">Cpu</a></li>
+					<li><a class = "nav-link " id = "maticna_ploca" style = "color:black; font-weight:bold;" value = "maticna_ploca" onClick = "reply_click(this.id)" href="#">Matična ploča</a></li>
+					<li><a class = "nav-link " id = "napajanje" style = "color:black; font-weight:bold;" value = "napajanje" onClick = "reply_click(this.id)" href="#">Napajanje</a></li>
+					<li><a class = "nav-link " id = "graficka_kartica" style = "color:black; font-weight:bold;" value = "graficka_kartica" onClick = "reply_click(this.id)" href="#">Grafička kartica</a></li>
+					<li><a class = "nav-link " id = "hdd" style = "color:black; font-weight:bold;" value = "hdd" onClick = "reply_click(this.id)" href="#">Tvrdi disk</a></li>
+					<li><a class = "nav-link " id = "ssd" style = "color:black; font-weight:bold;" value = "ssd" onClick = "reply_click(this.id)" href="#">SSD</a></li>
+					<li><a class = "nav-link " id = "memorija" style = "color:black; font-weight:bold;" value = "memorija" onClick = "reply_click(this.id)" href="#">Memorija</a></li>
 				</ul>
 			</li>
 			
@@ -384,3 +384,4 @@ form{
   
   
 	?>
+	

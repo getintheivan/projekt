@@ -24,6 +24,7 @@ if(!empty($_POST['spremi'])){
         $watt = ocisti_tekst($_POST['watt']); 
         $cijena = ocisti_tekst($_POST['cijena']); 
         $naziv_proizvoda = ocisti_tekst($_POST['naziv_proizvoda']); 
+		$url = ocisti_tekst($_POST['url']);
 	
 
 	$sql = "UPDATE proizvodi 
@@ -36,14 +37,19 @@ if(!empty($_POST['spremi'])){
 				velicina='$velicina',              
 				watt='$watt',
 				cijena='$cijena',
-				naziv_proizvoda='$naziv_proizvoda'
+				naziv_proizvoda='$naziv_proizvoda',
+				url = '$url'
 			WHERE
 				id = {$_GET['id']}
 			;";
 	
 	$rez = mysqli_query($con, $sql);
-	echo mysqli_error($con);
-
+	if($rez){
+		$id = mysqli_insert_id($con);
+            header("Location:komponenta.php?id=".$_GET['id']);
+			$_POST = array();
+			exit();
+	}
 	
 }
 
@@ -204,6 +210,14 @@ require_once "includes/header_projekt.php";
             <label class="col-sm-2 control-label" for="naziv_proizvoda">Upišite naziv proizvoda:</label>
                 <div class = "col-sm-7">
                     <input class ="form-control" type="text" name='naziv_proizvoda' id='naziv_proizvoda' value = "<?=$proizvodi['naziv_proizvoda'];?>" required>
+                </div>
+        </div>
+		
+		<div class="form-group"> 
+            <label class="col-sm-2 control-label" for="url">Unesite link slike:</label>
+                <div class = "col-sm-7">
+                    <img src = "<?=$proizvodi['url'];?>" alt = "slika" class = "img-fluid img-thumbnail">
+					<input name = "url" id = "url" type = "text" class = "form-control" value = "<?=$proizvodi['url'];?>">
                 </div>
         </div>
 

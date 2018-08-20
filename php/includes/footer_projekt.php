@@ -245,7 +245,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="../bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
@@ -257,7 +257,15 @@
 
     <!-- Custom scripts for this template -->
     <script src="../bootstrap/js/agency.min.js"></script>
-
+	
+	<!-- DataTables JS -->
+    <script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#table").DataTable();
+		});
+	</script>
+	
   </body>
 
 </html>

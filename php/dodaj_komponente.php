@@ -19,16 +19,17 @@
         $ddr_type = ocisti_tekst($_POST['ddr_type']);
         $socket = ocisti_tekst($_POST['socket']);
         $chipset = ocisti_tekst($_POST['chipset']);
-        $id_proizvodac_fk  = ocisti_tekst($_POST['id_proizvodac_fk ']);
+        $id_proizvodac_fk= ocisti_tekst($_POST['id_proizvodac_fk']);
         $komponenta_tip_fk = ocisti_tekst($_POST['komponenta_tip_fk']);
         $velicina = ocisti_tekst($_POST['velicina']);
         $watt = ocisti_tekst($_POST['watt']); 
         $cijena = ocisti_tekst($_POST['cijena']); 
         $naziv_proizvoda = ocisti_tekst($_POST['naziv_proizvoda']); 
+		$url = ocisti_tekst($_POST['url']);
 
         $sql = "INSERT INTO
                `proizvodi` 
-                (`ddr_type`,`socket`,`chipset`,`id_proizvodac_fk`,`komponenta_tip_fk`,velicina,`watt`,cijena,naziv_proizvoda)
+                (`ddr_type`,`socket`,`chipset`,`id_proizvodac_fk`,`komponenta_tip_fk`,velicina,`watt`,cijena,naziv_proizvoda,url)
                 VALUES (
                     '$ddr_type',
                     '$socket',
@@ -38,7 +39,8 @@
                     '$velicina',              
                     '$watt',
 					'$cijena',
-					'$naziv_proizvoda'
+					'$naziv_proizvoda',
+					'$url'
                  );";
         $res = mysqli_query($con,$sql);
 
@@ -163,6 +165,13 @@
             <label class="col-sm-2 control-label" for="naziv_proizvoda">Upišite naziv proizvoda:</label>
                 <div class = "col-sm-7">
                     <input class ="form-control" type="text" name='naziv_proizvoda' id='naziv_proizvoda' value = "" required>
+                </div>
+        </div>
+		
+		<div class="form-group"> 
+            <label class="col-sm-2 control-label" for="url">Unesite link slike:</label>
+                <div class = "col-sm-7">
+                    <input class ="form-control" type="text" name='url' id='url' value = "" required>
                 </div>
         </div>
 
