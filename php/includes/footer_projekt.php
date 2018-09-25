@@ -3,7 +3,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4">
-            <span class="copyright">Copyright &copy; Projekt 2018</span>
+            <span class="copyright">Copyright &copy; Ivan Pedić 2018 </br>POU
+Vinkovci - Projektni zadatak iz web programiranja</span>
           </div>
           <div class="col-md-4">
             <ul class="list-inline social-buttons">
@@ -264,7 +265,12 @@
 		$(document).ready(function(){
 			$("#table").DataTable();
 		});
+		$(".clickable-row-item").click(function() {
+        window.location.assign("komponenta.php?id="+$(this).attr('id'));   
+    });
+	
 	</script>
+	
 	
   </body>
 

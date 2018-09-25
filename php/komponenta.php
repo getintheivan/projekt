@@ -1,9 +1,12 @@
 <?php
 session_start();
+if(!isset($_SESSION['login'])){
+	error_reporting(0);
+}
 require_once "includes/functions.php";
 $con = spajanje();
 $title = "Proizvod";
-if($_SESSION['uloga'] !== "1"){
+if($_SESSION['uloga'] !== "1"and ($_SESSION['uloga']!=="2")){
 	die('<div class="alert" style="background:yellow;"> 
 	<a href="index.php" class="close" data-dismiss="alert" aria-label="close">
 	&times;

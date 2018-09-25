@@ -25,7 +25,7 @@ if(!empty($_POST['spremi'])){
 			SET
 				ime = '$ime',
 				prezime = '$prezime',
-				mjesto = '$mjesto',
+				id_mjesto_fk = '$mjesto',
 				email = '$email',
 				id_status_fk = '$status' 
 			WHERE
@@ -107,11 +107,34 @@ require_once "includes/header_projekt.php";
 	</div>
 	
 	<div class="form-group">
-		<label for ="mjesto" class="col-sm-2 control-label">Mjesto</label>
-		<div class="col-sm-5">
-			<input type="text" id="mjesto" name="mjesto" class ="form-control" value="<?=$user['mjesto'];?>"/>
+			<label for ="mjesto" class="col-sm-2 control-label">Mjesto</label>
+			<div class="col-sm-5">
+				<select id="mjesto" name="mjesto" class ="form-control">
+					<option selected disabled value="" >Odaberite mjesto</option>
+				<?php 
+				
+					$sql = "SELECT * FROM mjesto;";
+					$res_mjesto = mysqli_query($con, $sql);
+					
+					if(mysqli_num_rows($res_mjesto)>0){
+						while($mjesto = mysqli_fetch_assoc($res_mjesto)){
+							error_reporting(0);
+
+							echo '<option value="'.$mjesto['id'].'"';
+							
+							if($mjesto['id'] == $user['id_mjesto_fk'])
+								echo "selected";
+						
+							echo '>';
+							echo $mjesto['naziv'];
+							echo '</option>';
+						}
+					}
+					
+				?>
+				</select>
+			</div>
 		</div>
-	</div>
 	
 	<div class="form-group">
 		<label for ="email" class="col-sm-2 control-label">Email</label>

@@ -16,9 +16,10 @@ if($_SESSION['uloga'] !== "1"){
 }
 else{
 
-$sql = "SELECT users.id, users.ime, users.prezime, users.mjesto, users.email, uloge.status  
+$sql = "SELECT users.id, users.ime, users.prezime, users.email, uloge.status, mjesto.naziv 
 		FROM users
-		INNER JOIN uloge ON uloge.id = users.id_status_fk ;";
+		INNER JOIN uloge ON uloge.id = users.id_status_fk 
+		INNER JOIN mjesto ON mjesto.id = users.id_mjesto_fk ;";
 
 $result = mysqli_query($con, $sql);
 
@@ -57,7 +58,7 @@ if (mysqli_num_rows($result)>0){
 				<td>".$user['id']."</td>
 				<td>".$user['ime']."</td>
 				<td>".$user['prezime']."</td>
-				<td>".$user['mjesto']."</td>
+				<td>".$user['naziv']."</td>
 				<td>".$user['email']."</td>
 				<td>".$user['status']."</td>
 				
@@ -74,6 +75,7 @@ if (mysqli_num_rows($result)>0){
 	echo "</tbody></table>";
 }
 else {
+	
 	echo "<p>U bazi nema rezultata za ovaj upit: $sql </p>";
 }
 }

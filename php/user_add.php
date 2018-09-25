@@ -21,27 +21,29 @@
         $username = ocisti_tekst($_POST['username']);
         $password = ocisti_tekst(md5($_POST['password']));
         $email = ocisti_tekst($_POST['email']);
-        $mjesto = ocisti_tekst($_POST['mjesto']);
+        $id_mjesto_fk = ocisti_tekst($_POST['id_mjesto_fk']);
         $id_status_fk = ocisti_tekst($_POST['id_status_fk']); 
 
         $sql = "INSERT INTO
                `users` 
-                (`ime`,`prezime`,`username`,`password`,`email`,mjesto,`id_status_fk`)
+                (`ime`,`prezime`,`username`,`password`,`email`,`id_mjesto_fk`,`id_status_fk`)
                 VALUES (
                     '$ime',
                     '$prezime',
                     '$username',
                     '$password',
-					'$email', 
-                    '$mjesto',              
+					'$email',
+					'$id_mjesto_fk',
                     '$id_status_fk'
                  );";
+				 
         $res = mysqli_query($con,$sql);
 
         if($res){
             $id = mysqli_insert_id($con);
+			$_POST = array();
             header("Location:user.php?id=$id");
-            
+            exit();
         }
         else{
             echo "korisnik nije upisan " .mysqli_error($con);
@@ -90,11 +92,31 @@
                 </div>
         </div>
 
-        <div class="form-group"> 
-            <label class="col-sm-2 control-label" for="mjesto">Odaberite mjesto:</label>
-                <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='mjesto' id='mjesto' value = "" required>
-                </div>
+        <!-- select -->
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="id_mjesto_fk">Odaberite mjesto:</label>
+            <div class = "col-sm-7">
+                <select class ="form-control" type="text" name='id_mjesto_fk' id='id_mjesto_fk' required>
+                
+                <option value="NULL" selected disabled>--</option>
+
+                <?php 
+                
+                $sql = "SELECT * FROM mjesto";
+                $res_mj = mysqli_query ($con, $sql);
+
+                if(mysqli_num_rows($res_mj)>0){
+                    while($mj = mysqli_fetch_assoc($res_mj)){
+                            echo '<option value="'.$mj['id'].'">';
+                            echo ucfirst($mj['naziv']);
+                            echo '</option>'; 
+                    }
+                }
+
+                ?>
+
+                </select>
+            </div>
         </div>
 
 

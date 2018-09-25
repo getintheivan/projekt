@@ -1,15 +1,12 @@
 <?php
 session_start();
-$title = "Naslovna";
 
 require_once "includes/functions.php";
 $con = spajanje();
+$title = "Naslovna";
+
 require_once "includes/header_projekt.php";
 
-
-if(isset($_SESSION['login'])){
-	echo "<h2>Pozdrav, ". $_SESSION['username'];
-}
 
 
 ?>
@@ -126,7 +123,7 @@ if(isset($_SESSION['login'])){
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Servisi</h2>
+            <h2 class="section-heading text-uppercase">Usluge</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
           </div>
         </div>
@@ -136,7 +133,7 @@ if(isset($_SESSION['login'])){
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">E-Commerce</h4>
+            <h4 class="service-heading">online kupnja</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
           <div class="col-md-4">
@@ -144,7 +141,7 @@ if(isset($_SESSION['login'])){
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Responsive Design</h4>
+            <h4 class="service-heading">servisiranje računala</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
           <div class="col-md-4">
@@ -152,7 +149,7 @@ if(isset($_SESSION['login'])){
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Web Security</h4>
+            <h4 class="service-heading">web sigurnost</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
         </div>
@@ -228,11 +225,12 @@ if(isset($_SESSION['login'])){
                   </div>
                 </div>
               </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
+             <li class  ="timeline-inverted" >
+				<a href="index.php">
+                <div class="timeline-image" style="color:black;" >
                   <h4>Be Part
                     <br>Of Our
-                    <br>Story!</h4>
+                    <br>Story!</h4></a>
                 </div>
               </li>
             </ul>

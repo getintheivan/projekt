@@ -30,7 +30,7 @@
 
 	<style>
 	
-	.dropdown-menu {
+.dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -44,7 +44,7 @@
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color: transparent;
+  background-color: white;
   background-clip: padding-box;
   border: 0px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -52,7 +52,11 @@
 form{
 	margin-top:10px;
 }
-
+.small-thumbnail{
+	  width:100px;
+	  height:75px;
+	  
+}
 
 
 
@@ -64,7 +68,9 @@ form{
   
 	 
 <?php 
-  if(isset($_SESSION['login']) and $_SESSION['login'] == true){
+error_reporting(0);
+
+if(isset($_SESSION['login']) and $_SESSION['login'] == true){
     if($_SESSION['uloga'] == "3"){
       
   echo '
@@ -79,7 +85,7 @@ form{
         
 		<ul class = "navbar-nav nav navbar-left text-uppercase ml-auto">
 			<li class = "nav-item">
-				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">na vrh</a>
+				<a class = "nav-link js-scroll-trigger" href = "index.php #top" for = "top">na vrh</a>
 			</li>
 		</ul>
 		
@@ -93,20 +99,20 @@ form{
 			
 			
             <li class="dropdown nav-item">
-				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">test kupac</a>
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">'.$_SESSION["username"].'</a>
 				<ul class  ="dropdown-menu"  >
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Cpu</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Matična ploča</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Napajanje</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Grafička kartica</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Tvrdi disk</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">SSD</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Memorija</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="cpu.php">Cpu</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="maticna_ploca.php">Matična ploča</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="napajanje.php">Napajanje</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="graficka_kartica.php">Grafička kartica</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="hdd.php">Tvrdi disk</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="ssd.php">SSD</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="memorija.php">Memorija</a></li>
 				</ul>
 			</li>
 			
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for = "akcije" href="#akcije">Akcije</a>
+              <a class="nav-link js-scroll-trigger" for = "akcije" href="komponenta_proba.php">Akcije</a>
             </li>
 			
 			 <li class="nav-item">
@@ -125,6 +131,8 @@ form{
             
               <a class="nav-link js-scroll-trigger" href="odjava.php" for = "odjava">Odjava</a>
             </li>
+			
+			
 
           </ul>
 		  
@@ -171,39 +179,22 @@ form{
 			
 			
 			
-            <li class="dropdown nav-item">
-				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">test zaposlenik</a>
-				<ul class ="dropdown-menu" >
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">test zaposlenik</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Matična ploča</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Napajanje</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Grafička kartica</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Tvrdi disk</a></li>
-					<li><a class = "nav-link" style = "color:black;font-weight:bold;" href="#">SSD</a></li>
-					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="#">Memorija</a></li>
-				</ul>
-			</li>
+          
 			
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for = "akcije" href="#akcije">Akcije</a>
+              <a class="nav-link js-scroll-trigger" for = "akcije" href="dodaj_komponente.php">dodaj komponente</a>
             </li>
 			
 			 <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for ="servisi" href="#servisi">Servisi</a>
+              <a class="nav-link js-scroll-trigger" for ="servisi" href="komponente.php">Popis komponenti</a>
             </li>
 			
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about" for = "about">O nama</a>
-            </li>
-           
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact" for = "contact">Kontakt</a>
-            </li>
-			
-			<li class="nav-item">
-            
-              <a class="nav-link js-scroll-trigger" href="odjava.php" for = "contact">Odjava</a>
-            </li>
+           <li class="dropdown nav-item">
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">'.$_SESSION["username"].'</a>
+				<ul class  ="dropdown-menu"  >
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="odjava.php">Odjava</a></li>
+				</ul>
+			</li>
 
           </ul>
 		  
@@ -241,7 +232,7 @@ form{
         
 		<ul class = "navbar-nav nav navbar-left text-uppercase ml-auto">
 			<li class = "nav-item">
-				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">Na vrh</a>
+				<a class = "nav-link js-scroll-trigger" href = "index.php#top" for = "top">Na vrh</a>
 			</li>
 		</ul>
 		
@@ -255,34 +246,24 @@ form{
 			
 			
             <li class="dropdown nav-item">
-				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">admin</a>
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Izbornik</a>
 				<ul class ="dropdown-menu" >
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="user_add.php">dodaj korisnika</a></li>
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="users.php">korisnici</a></li>
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="dodaj_komponente.php">dodaj komponente</a></li>
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="komponente.php">Popis komponenti</a></li>
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="mjesto_add.php">Dodaj mjesto u bazu</a></li>
 				</ul>
 			</li>
 			
-			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for = "akcije" href="index.php#akcije">Akcije</a>
-            </li>
+
+			<li class="dropdown nav-item">
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">'.$_SESSION["username"].'</a>
+				<ul class  ="dropdown-menu"  >
+					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="odjava.php">Odjava</a></li>
+				</ul>
+			</li>
 			
-			 <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for ="servisi" href="index.php#servisi">Servisi</a>
-            </li>
-			
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about" for = "index.php#about">O nama</a>
-            </li>
-           
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact" for = "index.php#contact">Kontakt</a>
-            </li>
-			
-			<li class="nav-item">   
-              <a class="nav-link js-scroll-trigger" href="odjava.php" for = "contact">Odjava</a>
-            </li>
 			
 			
 				
@@ -315,7 +296,7 @@ form{
         
 		<ul class = "navbar-nav nav navbar-left text-uppercase ml-auto">
 			<li class = "nav-item">
-				<a class = "nav-link js-scroll-trigger" href = "#top" for = "top">na vrh</a>
+				<a class = "nav-link js-scroll-trigger" href = "index.php#top" for = "top">na vrh</a>
 			</li>
 		</ul>
 		
@@ -330,37 +311,47 @@ form{
 			
             <li class="dropdown nav-item" >
 				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" >komponente</a>
-				<ul class ="dropdown-menu" >
-					<li><a class = "nav-link " id = "cpu" style = "color:black; font-weight:bold;" value = "cpu" onClick = "reply_click(this.id)" href="#">Cpu</a></li>
-					<li><a class = "nav-link " id = "maticna_ploca" style = "color:black; font-weight:bold;" value = "maticna_ploca" onClick = "reply_click(this.id)" href="#">Matična ploča</a></li>
-					<li><a class = "nav-link " id = "napajanje" style = "color:black; font-weight:bold;" value = "napajanje" onClick = "reply_click(this.id)" href="#">Napajanje</a></li>
-					<li><a class = "nav-link " id = "graficka_kartica" style = "color:black; font-weight:bold;" value = "graficka_kartica" onClick = "reply_click(this.id)" href="#">Grafička kartica</a></li>
-					<li><a class = "nav-link " id = "hdd" style = "color:black; font-weight:bold;" value = "hdd" onClick = "reply_click(this.id)" href="#">Tvrdi disk</a></li>
-					<li><a class = "nav-link " id = "ssd" style = "color:black; font-weight:bold;" value = "ssd" onClick = "reply_click(this.id)" href="#">SSD</a></li>
-					<li><a class = "nav-link " id = "memorija" style = "color:black; font-weight:bold;" value = "memorija" onClick = "reply_click(this.id)" href="#">Memorija</a></li>
+				<ul class ="dropdown-menu"  >
+				
+					<li><a class = "nav-link " id = "cpu" style = "color:black; font-weight:bold;"  href="cpu.php">Cpu</a></li>
+					
+					<li><a class = "nav-link " id = "maticna_ploca" style = "color:black; font-weight:bold;"  href="maticna_ploca.php">Matična ploča</a></li>
+					
+					<li><a class = "nav-link " id = "napajanje" style = "color:black; font-weight:bold;"  href="napajanje.php">Napajanje</a></li>
+					
+					<li><a class = "nav-link " id = "graficka_kartica" style = "color:black; font-weight:bold;"  href="graficka_kartica.php">Grafička kartica</a></li>
+					
+					<li><a class = "nav-link " id = "hdd" style = "color:black; font-weight:bold;"  href="hdd.php">Tvrdi disk</a></li>
+					
+					<li><a class = "nav-link " id = "ssd" style = "color:black; font-weight:bold;"  href="ssd.php">SSD</a></li>
+					
+					<li><a class = "nav-link " id = "memorija" style = "color:black; font-weight:bold;"  href="memorija.php">Memorija</a></li>
+					
 				</ul>
 			</li>
 			
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for = "akcije" href="#akcije">Akcije</a>
+              <a class="nav-link js-scroll-trigger" for = "akcije" href="index.php#akcije">Akcije</a>
             </li>
 			
 			 <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for ="servisi" href="#servisi">Servisi</a>
+              <a class="nav-link js-scroll-trigger" for ="servisi" href="#services">servis</a>
             </li>
 			
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about" for = "about">O nama</a>
+              <a class="nav-link js-scroll-trigger" for = "about" href="index.php#about" for = "about">O nama</a>
             </li>
            
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact" for = "contact">Kontakt</a>
-            </li>
+            
 			
 			<li class="nav-item">
             
               <a class="nav-link js-scroll-trigger" href="prijava.php">Prijava</a>
+            </li>
+			<li class="nav-item">
             
+              <a class="nav-link js-scroll-trigger" href="registracija.php">registriraj se</a>
+            </li>
 
           </ul>
 		  

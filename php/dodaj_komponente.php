@@ -4,12 +4,12 @@
     $title = "Dodaj komponentu";
     require_once "includes/functions.php";
     $con = spajanje();
-    if($_SESSION['uloga'] !== "1"){
+    if($_SESSION['uloga'] !== "1"and ($_SESSION['uloga']!=="2")){
         die('<div class="alert" style="background:yellow;"> 
         <a href="index.php" class="close" data-dismiss="alert" aria-label="close">
         &times;
         </a>
-        <strong>Nemate ovlasti za pristup ovoj stranici!</strong>
+      
         
         </div>');
         }

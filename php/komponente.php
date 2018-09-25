@@ -6,7 +6,7 @@ require_once "includes/functions.php";
 $title = "Popis komponenti";
 
 $con = spajanje();
-if($_SESSION['uloga'] !== "1"){
+if($_SESSION['uloga'] !== "1"&"2"){
 	$sql = "SELECT
 			proizvodi.id,
 			proizvodi.ddr_type,
@@ -52,7 +52,7 @@ if (mysqli_num_rows($result)>0){
 
 	while($proizvod = mysqli_fetch_assoc($result)){
 		echo "
-			<tr>
+			<tr class = 'clickable-row-item' id = ".$proizvod['id'].">
 				<td>".$proizvod['id']."</td>
 				<td>".$proizvod['ddr_type']."</td>
 				<td>".$proizvod['socket']."</td>
@@ -63,7 +63,7 @@ if (mysqli_num_rows($result)>0){
 				<td>".$proizvod['watt']."</td>
 				<td>".$proizvod['cijena']."</td>
 				<td>".$proizvod['naziv_proizvoda']."</td>
-				<td><img src = ".$proizvod['url']." alt = 'slika' class = 'img-fluid img-thumbnail'></td>
+				<td><img src = ".$proizvod['url']." alt = 'slika' class = 'img-fluid img-thumbnail small-thumbnail'></td>
 			</tr>";
 	}
 	echo "</tbody></table>";
@@ -134,7 +134,7 @@ if (mysqli_num_rows($result)>0){
 
 	while($proizvod = mysqli_fetch_assoc($result)){
 		echo "
-			<tr>
+			<tr class = 'clickable-row-item' id = ".$proizvod['id'].">
 				<td>".$proizvod['id']."</td>
 				<td>".$proizvod['ddr_type']."</td>
 				<td>".$proizvod['socket']."</td>
@@ -145,7 +145,7 @@ if (mysqli_num_rows($result)>0){
 				<td>".$proizvod['watt']."</td>
 				<td>".$proizvod['cijena']."</td>
 				<td>".$proizvod['naziv_proizvoda']."</td>
-				<td><img src = ".$proizvod['url']." alt = 'slika' class = 'img-fluid img-thumbnail'></td>
+				<td><img src = ".$proizvod['url']." alt = 'slika' class = 'img-fluid small-thumbnail'></td>
 	
 				
 				<td>
@@ -170,7 +170,7 @@ require_once "includes/footer_projekt.php";
 							
 ?>
 						
-						
+	
 						
 						
 					

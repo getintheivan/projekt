@@ -27,27 +27,30 @@ if(isset($_POST['submit'])){
 		
 		$rezultat=mysqli_query($con,$sql);
 		
-		//echo "rezultat = ";
-		//var_dump ($rezultat);
 		
 		if(mysqli_num_rows($rezultat) == 1){
 			
 			$user= mysqli_fetch_assoc($rezultat);
 			
-			if($password == $user['password']){
+			if($password == $user['password'] and $username = $user['username']){
 				
 				$_SESSION['login'] = true;
 				$_SESSION['username'] = $username;
+				$_SESSION['userid'] = $user['id'];
 				$_SESSION['uloga'] = $user['id_status_fk'];
-				
-				if(isset($_POST['zapamti'])){
-					setcookiealive('username',$username, time()+7*24*60*60);
-				}else{
-					setcookiealive('username',$username, time()-7*24*60*60);
+						
+						if(isset($_POST['zapamti'])){
+				  setcookiealive('username',$username, time()+7*24*60*60);
+				  setcookiealive('userid',$_SESSION['userid'], time()+7*24*60*60);
+				  setcookiealive('uloga', $user['id_status_fk'], time()+7*24*60*60);
+						}
+						else{
+				  setcookiealive('username',$username, time()-7*24*60*60);				 
+				  setcookiealive('userid',$_SESSION['userid'], time()-7*24*60*60);
+				  setcookiealive('uloga', $user['id_status_fk'], time()-7*24*60*60);
 				}
-				// header("Location:index.php");
-				// exit();
-			}
+
+      }
 			else{
 				
 				$greska.="Pogrešna lozinka";
@@ -71,8 +74,9 @@ if(!isset($_SESSION['login'])){
 		
 		$_SESSION['login']=true;
 		$_SESSION['username'] = $_COOKIE['username'];
-		
+		$_SESSION['uloga'] = $_COOKIE['uloga'];
 	}
+	
 }
 
 require_once "includes/header_projekt.php";
@@ -141,7 +145,7 @@ echo '
 
 }
 else{
-	echo "<h2> Pozdrav, ".$_SESSION['username']."</h2>";
+	
 }
 
 
