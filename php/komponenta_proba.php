@@ -2,7 +2,6 @@
 session_start();
 require_once "includes/functions.php";
 require_once "includes/header_projekt.php";
-ispisi_polje($_SESSION);
 $con = spajanje();
 $title = "košarica";
 

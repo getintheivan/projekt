@@ -6,16 +6,6 @@ if(!isset($_SESSION['login'])){
 require_once "includes/functions.php";
 $con = spajanje();
 $title = "Proizvod";
-if($_SESSION['uloga'] !== "1"and ($_SESSION['uloga']!=="2")){
-	die('<div class="alert" style="background:yellow;"> 
-	<a href="index.php" class="close" data-dismiss="alert" aria-label="close">
-	&times;
-	</a>
-	<strong>Nemate ovlasti za pristup ovoj stranici!</strong>
-	
-	</div>');
-}
-else{
 if(!empty($_POST['spremi'])){
 	
 		$ddr_type = ocisti_tekst($_POST['ddr_type']);
@@ -81,40 +71,33 @@ else {
         
         </div>');
 }
-}
+
 require_once "includes/header_projekt.php";
 
 ?>
 <div class = "container">
-<form class="form-horizontal" action ="" method = "post">
-	
-	<div class="form-group">
-		<label for="id_proizvodi" class="col-sm-2 control-label">ID</label>
-		<div class="col-sm-5">
-		  <input type="text" class="form-control" placeholder="id_proizvodi" value="<?php if(isset($proizvodi['id'])) echo  $proizvodi['id'];?>" disabled="disabled">
-		  <input type="text" id="id_proizvodi" name="id_proizvodi" placeholder="id_proizvodi" value="<?php if(isset($proizvodi['id'])) echo $proizvodi['id'] ?>" hidden="hidden">
-		</div>
-	</div>
-	
-	
+<form class="form-horizontal" action ="" method = "post">	
+	<?php 
+	if($_SESSION['uloga'] == 1 or $_SESSION['uloga'] == 2){
+		echo '
 	<div style = "margin-top:10px;" class="form-group">
 		    <label for ="ddr_type" class="col-sm-2 control-label">DDR tip</label>
 		        <div class = "col-sm-7">
-			        <input type="text" id="ddr_type" name="ddr_type" class ="form-control" value="<?=$proizvodi['ddr_type'];?>" >
+			        <input type="text" id="ddr_type" name="ddr_type" class ="form-control" value="'.$proizvodi['ddr_type'].'">
 		        </div>
 	    </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="socket">Unesite socket:</label>
                 <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='socket' id='socket'  value = "<?=$proizvodi['socket'];?>" > 
+                    <input class ="form-control" type="text" name="socket" id="socket"  value="'.$proizvodi['socket'].'">
                 </div>
         </div>
         
         <div class="form-group">
             <label class="col-sm-2 control-label" for="chipset">Unesite chipset:</label>
                 <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='chipset' id='chipset'  value = "<?=$proizvodi['chipset'];?>" >
+                    <input class ="form-control" type="text" name="chipset" id="chipset"  value="'.$proizvodi['chipset'].'">
                 </div>
         </div>
 
@@ -122,11 +105,11 @@ require_once "includes/header_projekt.php";
         <div class="form-group">
           <label class="col-sm-2 control-label" for="id_proizvodac_fk">Odaberite proizvodača:</label>
             <div class = "col-sm-7">
-                <select class ="form-control" type="text" name='id_proizvodac_fk' id='id_proizvodac_fk' required>
+                <select class ="form-control" type="text" name="id_proizvodac_fk" id="id_proizvodac_fk" required>
                 
-                <option value="NULL" selected disabled>--</option>
+                <option value="NULL" selected disabled>--</option>';
 
-                <?php 
+                
                 
                 $sql = "SELECT * FROM proizvodac;";
 
@@ -136,30 +119,29 @@ require_once "includes/header_projekt.php";
 					while($maker = mysqli_fetch_assoc($res)){
 						error_reporting(0);
 
-						echo '<option value="'.$maker['id'].'"';
+						echo '<option value="'.$maker["id"].'"';
 						
-						if($maker['id'] == $proizvodi['id_proizvodac_fk'])
+						if($maker["id"] == $proizvodi["id_proizvodac_fk"])
 							echo "selected";
 					
-						echo '>';
-						echo $maker['naziv_proizvodaca'];
-						echo '</option>';
+						echo ">";
+						echo $maker["naziv_proizvodaca"];
+						echo "</option>";
 					}
 				}
-                ?>
+                
 
-                </select>
+              echo '  </select>
             </div>
         </div>
 		<!-- select -->
         <div class="form-group">
           <label class="col-sm-2 control-label" for="komponenta_tip_fk">Odaberite tip komponente:</label>
             <div class = "col-sm-7">
-                <select class ="form-control" type="text" name='komponenta_tip_fk' id='komponenta_tip_fk' required>
+                <select class ="form-control" type="text" name="komponenta_tip_fk" id="komponenta_tip_fk" required>
                 
-                <option value="NULL" selected disabled>--</option>
+                <option value="NULL" selected disabled>--</option>';
 
-                <?php 
                 
                 $sql = "SELECT * FROM tipovi_komponenti;";
 
@@ -180,23 +162,22 @@ require_once "includes/header_projekt.php";
 					}
 				}
 
-                ?>
 
-                </select>
+             echo'   </select>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="velicina">Unesite veličinu:</label>
                 <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='velicina' id='velicina' value = "<?=$proizvodi['velicina'];?>" >
+                    <input class ="form-control" type="text" name="velicina" id="velicina" value="'.$proizvodi['velicina'].'">
                 </div>
         </div>
 
         <div class="form-group"> 
             <label class="col-sm-2 control-label" for="watt">Upišite snagu:</label>
                 <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='watt' id='watt' value = "<?=$proizvodi['watt'];?>">
+                    <input class ="form-control" type="text" name="watt" id="watt" value="'.$proizvodi['watt'].'">
                 </div>
         </div>
 
@@ -205,31 +186,174 @@ require_once "includes/header_projekt.php";
         <div class="form-group"> 
             <label class="col-sm-2 control-label" for="cijena">Upišite cijenu:</label>
                 <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='cijena' id='cijena' value = "<?=$proizvodi['cijena'];?>" step = "0.01" required>
+                    <input class ="form-control" type="text" name="cijena" id="cijena" value="'.$proizvodi['cijena'].'" step = "0.01" required>
                 </div>
         </div>
 		
-		 <div class="form-group"> 
+		 <div style = "padding-bottom:100px;" class="form-group"> 
             <label class="col-sm-2 control-label" for="naziv_proizvoda">Upišite naziv proizvoda:</label>
                 <div class = "col-sm-7">
-                    <input class ="form-control" type="text" name='naziv_proizvoda' id='naziv_proizvoda' value = "<?=$proizvodi['naziv_proizvoda'];?>" required>
+                    <input class ="form-control" type="text" name="naziv_proizvoda" id="naziv_proizvoda" value="'.$proizvodi['naziv_proizvoda'].'" required>
                 </div>
         </div>
 		
-		<div class="form-group"> 
+		
+		
+			
+			<div class="form-group"> 
             <label class="col-sm-2 control-label" for="url">Unesite link slike:</label>
                 <div class = "col-sm-7">
-                    <img src = "<?=$proizvodi['url'];?>" alt = "slika" class = "img-fluid img-thumbnail">
-					<input name = "url" id = "url" type = "text" class = "form-control" value = "<?=$proizvodi['url'];?>">
+                    <img src = "'.$proizvodi['url'].'" alt = "slika" class = "img-fluid img-thumbnail">
+					<input name = "url" id = "url" type = "text" class = "form-control" value = "'.$proizvodi['url'].'">
                 </div>
         </div>
+		
 
-
-        <div class="form-group">
+        <div style = "padding-bottom:100px;" class="form-group">
           <div class="col-sm-2 col-sm-offset-5">
             <input class ="form-control btn btn-primary" id="spremi" value = "spremi" name="spremi" type="submit">
           </div>
         </div>
+		';}
+		
+		// Kupac+++++++++++++++++++++++
+		else {
+			echo '
+	<div style = "margin-top:10px;" class="form-group">
+		    <label for ="ddr_type" class="col-sm-2 control-label">DDR tip</label>
+		        <div class = "col-sm-7">
+			        <input disabled type="text" id="ddr_type" name="ddr_type" class ="form-control" value="'.$proizvodi['ddr_type'].'">
+		        </div>
+	    </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="socket">Socket:</label>
+                <div class = "col-sm-7">
+                    <input disabled class ="form-control" type="text" name="socket" id="socket"  value="'.$proizvodi['socket'].'">
+                </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="chipset">Chipset:</label>
+                <div class = "col-sm-7">
+                    <input disabled class ="form-control" type="text" name="chipset" id="chipset"  value="'.$proizvodi['chipset'].'">
+                </div>
+        </div>
+
+         <!-- select -->
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="id_proizvodac_fk">Proizvodač:</label>
+            <div class = "col-sm-7">
+                <select disabled class ="form-control" type="text" name="id_proizvodac_fk" id="id_proizvodac_fk" required>
+                
+                <option value="NULL" selected disabled>--</option>';
+
+                
+                
+                $sql = "SELECT * FROM proizvodac;";
+
+				$res = mysqli_query($con, $sql);
+
+				if(mysqli_num_rows($res)>0){
+					while($maker = mysqli_fetch_assoc($res)){
+						error_reporting(0);
+
+						echo '<option value="'.$maker["id"].'"';
+						
+						if($maker["id"] == $proizvodi["id_proizvodac_fk"])
+							echo "selected";
+					
+						echo ">";
+						echo $maker["naziv_proizvodaca"];
+						echo "</option>";
+					}
+				}
+                
+
+              echo '  </select>
+            </div>
+        </div>
+		<!-- select -->
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="komponenta_tip_fk">Tip komponente:</label>
+            <div class = "col-sm-7">
+                <select disabled class ="form-control" type="text" name="komponenta_tip_fk" id="komponenta_tip_fk" required>
+                
+                <option value="NULL" selected disabled>--</option>';
+
+                
+                $sql = "SELECT * FROM tipovi_komponenti;";
+
+				$res = mysqli_query($con, $sql);
+
+				if(mysqli_num_rows($res)>0){
+					while($type = mysqli_fetch_assoc($res)){
+						error_reporting(0);
+
+						echo '<option value="'.$type['id'].'"';
+						
+						if($type['id'] == $proizvodi['komponenta_tip_fk'])
+							echo "selected";
+					
+						echo '>';
+						echo $type['naziv'];
+						echo '</option>';
+					}
+				}
+
+
+             echo'   </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="velicina">Veličina:</label>
+                <div class = "col-sm-7">
+                    <input disabled class ="form-control" type="text" name="velicina" id="velicina" value="'.$proizvodi['velicina'].'">
+                </div>
+        </div>
+
+        <div class="form-group"> 
+            <label class="col-sm-2 control-label" for="watt">Snaga:</label>
+                <div class = "col-sm-7">
+                    <input disabled class ="form-control" type="text" name="watt" id="watt" value="'.$proizvodi['watt'].'">
+                </div>
+        </div>
+
+
+
+        <div class="form-group"> 
+            <label class="col-sm-2 control-label" for="cijena">Cijena:</label>
+                <div class = "col-sm-7">
+                    <input disabled class ="form-control" type="text" name="cijena" id="cijena" value="'.$proizvodi['cijena'].'" step = "0.01" required>
+                </div>
+        </div>
+		
+		 <div  class="form-group"> 
+            <label class="col-sm-2 control-label" for="naziv_proizvoda">Naziv proizvoda:</label>
+                <div class = "col-sm-7">
+                    <input disabled class ="form-control" type="text" name="naziv_proizvoda" id="naziv_proizvoda" value="'.$proizvodi['naziv_proizvoda'].'">
+                </div>
+        </div>
+		
+		<div style = "padding-bottom:100px;" class="form-group"> 
+                <div class = "col-sm-7">
+                    <img src = "'.$proizvodi['url'].'" alt = "slika" class = "img-fluid img-thumbnail">
+                </div>
+        </div>';
+		
+		
+		if($_SESSION['login'] === true){
+			echo '
+		<div style = "padding-bottom:100px;" class="form-group">
+          <div class="col-sm-3 col-sm-offset-6">
+            <a href = "komponente.php"><input class ="form-control btn btn-success" id="add_to_cart" value = "Dodaj u košaricu" name="add_to_cart"/></a>
+          </div>
+        </div>
+		
+		';}
+		}
+		?>
     </form>   
 </div>
 

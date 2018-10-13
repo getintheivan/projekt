@@ -69,6 +69,7 @@ $greska ="";
 	$query = "DELETE FROM $table_name_str WHERE id = $id";
 	$delete = mysqli_query($con, $query);
 }
+
 ?>
 						
 					

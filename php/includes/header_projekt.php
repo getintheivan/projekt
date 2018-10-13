@@ -53,12 +53,33 @@ form{
 	margin-top:10px;
 }
 .small-thumbnail{
-	  width:100px;
-	  height:75px;
+	  width: 240px;
+    height: 180px;
 	  
 }
+.card{
+	border:0 solid transparent;
+}
+.footer-container {
+    background-color:grey;
+    height:60px;
+    width:100%;
+    position:fixed;
+    bottom:0;
+    z-index:0;
+    clear: both;
+}
 
-
+.footer {
+	background-color: inherit;
+	text-align: center;
+	background-color: transparent;
+    height:60px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+	margin-bottom:50px;
+}
 
 
 	</style>
@@ -69,16 +90,50 @@ form{
 	 
 <?php 
 error_reporting(0);
-
 if(isset($_SESSION['login']) and $_SESSION['login'] == true){
+	
+	if(isset($_POST['naruci'])){
+		$id_orders = array();
+		for($i=0;$i<=count($_SESSION['shopping_cart']);$i++){
+		   array_push($id_orders,$_SESSION['shopping_cart'][$i]['item_id']);
+		}
+		$id_orders = rtrim(implode(",",$id_orders),",");
+		$user = $_SESSION['userid'];
+		$sql_order = "INSERT INTO narudzbe
+					  (`id_naruceni_proizvodi_fk`, `id_user_fk`) 
+					  VALUES
+					  ('$id_orders',$user);";
+		$res_order = mysqli_query($con, $sql_order);
+		
+		
+		if($res_order){
+			$SESSION['shopping_cart'] = "";
+			$_POST = array();
+			header("refresh:2;url=index.php");
+			echo    '<div class="alert" style="background:#0090bc; color:white;"> 
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">
+					&times;
+					</a>
+					<strong>Narudžba poslana!</strong>
+					</div>';
+			exit();
+		}
+		
+		else{
+		  header("refresh:2;url=index.php");
+		  echo '<div class="alert" style="background:yellow;"> 
+				<a href="index.php" class="close" data-dismiss="alert" aria-label="close">
+				&times;
+				</a>
+				<strong>Narudžba nije poslana! Greška: '.mysqli_error($con).'</strong>
+				</div>';
+		  exit();
+		}
+	}
+	
     if($_SESSION['uloga'] == "3"){
       
-  echo '
-   
-	
-        
-       
-       
+  echo '   
     <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" class="navbar-header"><a href="index.php" class="navbar-brand">THREAD</a>
       <div class="container"> 
@@ -93,8 +148,59 @@ if(isset($_SESSION['login']) and $_SESSION['login'] == true){
           Menu
           <i class="fa fa-bars"></i>
         </button>
+		
+		
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
+			
+			<li class="dropdown nav-item">
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-2x fa-ambulance"></i></a>
+				<ul class  ="dropdown-menu">';
+				
+					echo '
+					<li class="nav-item"><div style="clear:both"></div>
+			<br />
+			<h3>Detalji narudžbe</h3>
+			<div class="table-responsive-sm">
+			<form action = "" method = "post">
+				<table class="table table-bordered">
+					<tr>
+						<th>Naziv proizvoda</th>
+						<th>Cijena</th>
+						<th>Ukupno</th>
+						<th></th>
+					</tr>';
+					
+					if(!empty($_SESSION["shopping_cart"]))
+					{
+						$total = 0;
+						foreach($_SESSION["shopping_cart"] as $keys => $values)
+						{
+					echo '
+					<tr>
+						<td>'; echo $values["item_name"]; echo'</td>
+						<td>'; echo $values["item_price"];echo'kn</td>
+						<td id = "delete"><a href="'.$_SERVER['PHP_SELF'].'?action=delete&id='.$values["item_id"].'"><span class="text-danger">Remove</span></a></td>
+					</tr>';
+					
+							$total = $total + $values["item_price"];
+						}
+					echo'
+					<tr>
+						<td colspan="3" align="right">Total</td>
+						<td align="right">';echo number_format($total, 2); echo'</td>
+						<td></td>
+					</tr>';
+					
+					}
+					
+					echo '	
+				</table>
+			
+	</div>
+	</li><li class="nav-item"><button type = "submit" class = "btn btn-success" name = "naruci" id = "naruci">Naruči</button></li></form>';
+				
+				echo '	</li></ul>
 			
 			
 			
@@ -109,11 +215,7 @@ if(isset($_SESSION['login']) and $_SESSION['login'] == true){
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="ssd.php">SSD</a></li>
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="memorija.php">Memorija</a></li>
 				</ul>
-			</li>
-			
-			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" for = "akcije" href="komponenta_proba.php">Akcije</a>
-            </li>
+			</li>			
 			
 			 <li class="nav-item">
               <a class="nav-link js-scroll-trigger" for ="servisi" href="#servisi">Servisi</a>
@@ -128,18 +230,20 @@ if(isset($_SESSION['login']) and $_SESSION['login'] == true){
             </li>
 			
 			<li class="nav-item">
-            
               <a class="nav-link js-scroll-trigger" href="odjava.php" for = "odjava">Odjava</a>
             </li>
 			
+		</ul>	
 			
-
-          </ul>
+			
+			
+			
+			
+			
 		  
 		 
 	
-        </div>
-      </div>
+        
     </nav>
 	<!-- Header -->
    <header class="masthead"> 
@@ -197,7 +301,6 @@ if(isset($_SESSION['login']) and $_SESSION['login'] == true){
 			</li>
 
           </ul>
-		  
 		 
 	
         </div>
@@ -263,10 +366,6 @@ if(isset($_SESSION['login']) and $_SESSION['login'] == true){
 					<li><a class = "nav-link" style = "color:black; font-weight:bold;" href="odjava.php">Odjava</a></li>
 				</ul>
 			</li>
-			
-			
-			
-				
 
           </ul>
 		  
@@ -341,15 +440,12 @@ if(isset($_SESSION['login']) and $_SESSION['login'] == true){
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" for = "about" href="index.php#about" for = "about">O nama</a>
             </li>
-           
-            
 			
 			<li class="nav-item">
-            
               <a class="nav-link js-scroll-trigger" href="prijava.php">Prijava</a>
             </li>
+			
 			<li class="nav-item">
-            
               <a class="nav-link js-scroll-trigger" href="registracija.php">registriraj se</a>
             </li>
 

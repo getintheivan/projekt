@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2018 at 12:28 AM
+-- Generation Time: Oct 13, 2018 at 08:12 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -53,10 +53,17 @@ INSERT INTO `mjesto` (`id`, `naziv`, `pbr`) VALUES
 
 CREATE TABLE `narudzbe` (
   `id` int(11) NOT NULL,
-  `kolicina` varchar(30) NOT NULL,
-  `id_naruceni_proizvodi_fk` int(11) NOT NULL,
+  `id_naruceni_proizvodi_fk` varchar(255) NOT NULL,
   `id_user_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `narudzbe`
+--
+
+INSERT INTO `narudzbe` (`id`, `id_naruceni_proizvodi_fk`, `id_user_fk`) VALUES
+(1, '8,9,10,15', 10),
+(3, '19,20', 10);
 
 -- --------------------------------------------------------
 
@@ -101,8 +108,8 @@ CREATE TABLE `proizvodi` (
   `komponenta_tip_fk` int(11) NOT NULL,
   `velicina` varchar(30) DEFAULT NULL,
   `watt` varchar(30) DEFAULT NULL,
-  `cijena` varchar(30) NOT NULL,
-  `naziv_proizvoda` varchar(30) NOT NULL,
+  `cijena` double NOT NULL,
+  `naziv_proizvoda` varchar(255) NOT NULL,
   `url` varchar(2500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -111,23 +118,23 @@ CREATE TABLE `proizvodi` (
 --
 
 INSERT INTO `proizvodi` (`id`, `ddr_type`, `socket`, `chipset`, `id_proizvodac_fk`, `komponenta_tip_fk`, `velicina`, `watt`, `cijena`, `naziv_proizvoda`, `url`) VALUES
-(8, '', 'FCLGA1151', 'sdfs', 2, 1, '', '', '2200,00Kn', 'core i5 8600k', 'https://www.hgshop.hr/articleImages/59075-878.jpg?preset=product-view'),
-(9, '', 'FCLGA1151', '', 2, 1, '', '', '3100,00Kn', 'core i7 8700k', 'https://www.hgshop.hr/articleImages/59074-878.jpg?preset=product'),
-(10, '', 'LGA 2066', '', 2, 1, '', '', '16000,00Kn', 'Core i9 7980XE', 'https://www.hgshop.hr/articleImages/57426-878.jpg?preset=product'),
-(11, '', 'PGA AM4', '', 1, 1, '', '', '1000,00Kn', 'Ryzen 3 1300X', 'https://www.hgshop.hr/articleImages/54314-878.jpg?preset=product'),
-(12, '', 'PGA AM4', '', 1, 1, '', '', '1400,00Kn', 'Ryzen 5 1400', 'https://www.hgshop.hr/articleImages/49074-878.jpg?preset=product'),
-(13, '', 'PGA AM4', '', 1, 1, '', '', '1850,00Kn', 'AMD Ryzen 5 2600X', 'https://www.hgshop.hr/articleImages/68309-878.jpg?preset=product'),
-(14, '', 'PGA AM4', '', 1, 1, '', '', '2400,00Kn', 'Ryzen 7 1700X', 'https://www.hgshop.hr/articleImages/48286-878.jpg?preset=product'),
-(15, '', 'PGA AM4', '', 1, 1, '', '', '2500,00', 'Ryzen 7 1800X', 'https://www.hgshop.hr/articleImages/48287-878.jpg?preset=product'),
-(16, '', 'PGA TR4', '', 1, 1, '', '', '7500,00Kn', 'Ryzen ThreadRipper 1950X', 'https://www.hgshop.hr/articleImages/54945-878.jpg?preset=product'),
-(17, 'DDR4', '', '', 3, 4, '4GB', '', '410,00Kn', 'Kingston DDR4 ram stick 4gb', 'https://www.hgshop.hr/articleImages/35816-878.jpg?preset=product'),
-(18, 'DDR4', '', '', 3, 4, '8GB', '', '550,00Kn', 'Kingston DDR4 ram stick 8gb', 'https://www.hgshop.hr/articleImages/20762-878.jpg?preset=product'),
-(19, '', '', 'Z170-A', 6, 2, '', '', '1050,00Kn', 'ASUS Z170-A LGA1151 DDR4 HDMI ', 'https://www.asus.com/media/global/products/WljMlCHYYVrETxeq/P_setting_fff_1_90_end_500.png'),
-(20, '', '', '', 10, 3, '', '450W', '320,00Kn', 'Napajanje CORSAIR VS450, 450W,', 'https://www.hgshop.hr/articleImages/68537-878.jpg?preset=product'),
-(21, 'GDDR5', '', '', 9, 5, '2GB', '', '2000,00Kn', 'GIGABYTE nVidia GeForce GTX105', 'https://www.hgshop.hr/articleImages/45284-878.jpg?preset=product'),
-(22, '', '', '', 5, 6, '500Gb', '', '300,00Kn', 'TOSHIBA P300, 3.5&quot;, 7200', 'https://www.hgshop.hr/articleImages/39802-878.jpg?preset=product'),
-(23, '', '', '', 3, 7, '120Gb', '', '240,00Kn', 'KINGSTON A400, 2.5&quot;, SATA', 'https://www.hgshop.hr/articleImages/50061-878.jpg?preset=product'),
-(26, '', 'FCLGA1151', 'Z170-A', 2, 1, '', '', '2200,00', 'Ryzen 3 1300X', 'https://i.ebayimg.com/images/g/YUoAAOSwbF1aKP1n/s-l300.jpg');
+(8, '', 'FCLGA1151', 'sdfs', 2, 1, '', '', 2200, 'core i5 8600k', 'https://www.hgshop.hr/articleImages/59075-878.jpg?preset=product-view'),
+(9, '', 'FCLGA1151', '', 2, 1, '', '', 3100, 'core i7 8700k', 'https://www.hgshop.hr/articleImages/59074-878.jpg?preset=product'),
+(10, '', 'LGA 2066', '', 2, 1, '', '', 16000, 'Core i9 7980XE', 'https://www.hgshop.hr/articleImages/57426-878.jpg?preset=product'),
+(11, '', 'PGA AM4', '', 1, 1, '', '', 1000, 'Ryzen 3 1300X', 'https://www.hgshop.hr/articleImages/54314-878.jpg?preset=product'),
+(12, '', 'PGA AM4', '', 1, 1, '', '', 1400, 'Ryzen 5 1400', 'https://www.hgshop.hr/articleImages/49074-878.jpg?preset=product'),
+(13, '', 'PGA AM4', '', 1, 1, '', '', 1850, 'AMD Ryzen 5 2600X', 'https://www.hgshop.hr/articleImages/68309-878.jpg?preset=product'),
+(14, '', 'PGA AM4', '', 1, 1, '', '', 2400, 'Ryzen 7 1700X', 'https://www.hgshop.hr/articleImages/48286-878.jpg?preset=product'),
+(15, '', 'PGA AM4', '', 1, 1, '', '', 2500, 'Ryzen 7 1800X', 'https://www.hgshop.hr/articleImages/48287-878.jpg?preset=product'),
+(16, '', 'PGA TR4', '', 1, 1, '', '', 7500, 'Ryzen ThreadRipper 1950X', 'https://www.hgshop.hr/articleImages/54945-878.jpg?preset=product'),
+(17, 'DDR4', '', '', 3, 4, '4GB', '', 410, 'Kingston DDR4 ram stick 4gb', 'https://www.hgshop.hr/articleImages/35816-878.jpg?preset=product'),
+(18, 'DDR4', '', '', 3, 4, '8GB', '', 550, 'Kingston DDR4 ram stick 8gb', 'https://www.hgshop.hr/articleImages/20762-878.jpg?preset=product'),
+(19, '', '', 'Z170-A', 6, 2, '', '', 1050, 'ASUS Z170-A LGA1151 DDR4 HDMI ', 'https://www.asus.com/media/global/products/WljMlCHYYVrETxeq/P_setting_fff_1_90_end_500.png'),
+(20, '', '', '', 10, 3, '', '450W', 320, 'Napajanje CORSAIR VS450, 450W,', 'https://www.hgshop.hr/articleImages/68537-878.jpg?preset=product'),
+(21, 'GDDR5', '', '', 9, 5, '2GB', '', 2000, 'GIGABYTE nVidia GeForce GTX1050', 'https://www.hgshop.hr/articleImages/45284-878.jpg?preset=product'),
+(22, '', '', '', 5, 6, '500Gb', '', 300, 'TOSHIBA P300, 3.5&quot;, 7200', 'https://www.hgshop.hr/articleImages/39802-878.jpg?preset=product'),
+(23, '', '', '', 3, 7, '120Gb', '', 240, 'KINGSTON A400, 2.5&quot;, SATA', 'https://www.hgshop.hr/articleImages/50061-878.jpg?preset=product'),
+(26, '', 'FCLGA1151', 'Z170-A', 2, 1, '', '', 2200, 'INTEL Core i7 5820k', 'https://i.ebayimg.com/images/g/YUoAAOSwbF1aKP1n/s-l300.jpg');
 
 -- --------------------------------------------------------
 
@@ -278,7 +285,7 @@ ALTER TABLE `mjesto`
 -- AUTO_INCREMENT for table `narudzbe`
 --
 ALTER TABLE `narudzbe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `proizvodac`
@@ -318,8 +325,7 @@ ALTER TABLE `users`
 -- Constraints for table `narudzbe`
 --
 ALTER TABLE `narudzbe`
-  ADD CONSTRAINT `narudzbe_ibfk_1` FOREIGN KEY (`id_user_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `narudzbe_ibfk_2` FOREIGN KEY (`id_naruceni_proizvodi_fk`) REFERENCES `proizvodi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `narudzbe_ibfk_1` FOREIGN KEY (`id_user_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `proizvodi`

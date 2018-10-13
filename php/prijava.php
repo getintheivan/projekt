@@ -19,7 +19,6 @@ if(isset($_POST['submit'])){
 		$username = ocisti_tekst($_POST['username']);
 		$password = md5(ocisti_tekst($_POST['password']));
 		
-		//echo "username = " . $username;
 		
 		$sql = "SELECT *
 				FROM users
@@ -49,21 +48,22 @@ if(isset($_POST['submit'])){
 				  setcookiealive('userid',$_SESSION['userid'], time()-7*24*60*60);
 				  setcookiealive('uloga', $user['id_status_fk'], time()-7*24*60*60);
 				}
+				header("Location:index.php");
 
       }
 			else{
 				
-				$greska.="Pogrešna lozinka";
+				echo "Pogrešna lozinka";
 			}
 		}
 		else{
 			
-			$greska.="Nepostojeće korisničko ime";
+			echo "Nepostojeće korisničko ime";
 		}
 		
 	}
 	else{
-		$greska.="Molim popunite formu!";
+		echo "Molim popunite formu!";
 	}
 		
 }
@@ -75,6 +75,8 @@ if(!isset($_SESSION['login'])){
 		$_SESSION['login']=true;
 		$_SESSION['username'] = $_COOKIE['username'];
 		$_SESSION['uloga'] = $_COOKIE['uloga'];
+		
+		header("Location:index.php");
 	}
 	
 }

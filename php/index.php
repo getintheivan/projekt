@@ -4,11 +4,8 @@ session_start();
 require_once "includes/functions.php";
 $con = spajanje();
 $title = "Naslovna";
-
 require_once "includes/header_projekt.php";
-
-
-
+ispisi_polje($_GET);
 ?>
 	
 	
@@ -244,3 +241,8 @@ require_once "includes/header_projekt.php";
    
 <?php require_once "includes/footer_projekt.php"; ?>
    
+<script>
+	
+	$("#delete").hide();
+	
+	</script>

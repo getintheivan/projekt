@@ -1,8 +1,4 @@
-/*!
- * Start Bootstrap - Agency v4.1.1 (https://startbootstrap.com/template-overviews/agency)
- * Copyright 2013-2018 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-agency/blob/master/LICENSE)
- */
+
 body {
   overflow-x: hidden;
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -15,6 +11,24 @@ p {
 a {
   color: #fed136;
 }
+
+.stack-cards {
+    float: left;
+    clear: right;
+}
+
+.card{
+	height:250px;
+	width: 320px;
+	margin-bottom:120px;
+	padding:20px;
+}
+
+.card-img-stacked {
+    width: 250px;
+    height: 195px;
+}
+
 
 a:hover {
   color: #fec503;
@@ -180,6 +194,7 @@ header.masthead {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100px;
 }
 
 
